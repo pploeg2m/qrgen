@@ -1,0 +1,34 @@
+# ── Python ───────────────────────────────────────────
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# ── Generated output ─────────────────────────────────
+# generated QR PNGs
+qrcodes/
+# generated booklets, except the example templates
+*.pdf
+!front.pdf
+!back.pdf
+*.pdf.tmp
+# extensionless output (e.g. -o out)
+out
+
+# ── Release artifacts ────────────────────────────────
+*.zip
+*.tar.gz
+
+# ── Real roster data — NEVER commit (contains PII) ───
+HSorderedMatrk.csv
+QRcodeNUmbers.csv
+QRcodeNUmbers.xlsx
+tmp.csv
+
+# ── Editor / OS / tooling ────────────────────────────
+.DS_Store
+.claude/
+*~
+.idea/
+.vscode/
