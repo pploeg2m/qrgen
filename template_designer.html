@@ -60,6 +60,8 @@
   details.sel { background: var(--selbg); box-shadow: inset 3px 0 0 var(--sel); margin: 0 -12px; padding: 6px 12px; }
   details.sel > summary { color: var(--sel); }
   .row.sel { background: var(--selbg); box-shadow: inset 3px 0 0 var(--sel); margin: 5px -12px; padding: 3px 12px; }
+  #info button.mini { padding: 0 6px; margin-left: 4px; font-size: 12px; }
+  #info button.mini:disabled { opacity: .55; cursor: default; }
   #selNote { color: var(--sel); font-weight: 600; }
   #selNote button { padding: 0 6px; margin-left: 4px; font-weight: 400; color: var(--ink); }
   label.chk { display: inline-flex; gap: 6px; align-items: center; color: inherit; cursor: pointer; }
@@ -548,10 +550,23 @@ function fitQR() {
   S.cli.qr_x_cm = r3((S.g.frameLeft - S.g.frameW / 2) / 10);
   S.cli.qr_y_cm = Math.max(0, Math.floor((PAGE_H - lowest - 1 - size) * 10) / 100);
 }
+/* Moves this side's frame (top edge) so that it ends as far above the page's
+   bottom edge as the other side's frame. The row count stays as it is. */
+function matchFree(side) {
+  const p = S[side], G = geometry(side), free = PAGE_H - G.B;
+  const target = PAGE_H - geometry(side === 'front' ? 'back' : 'front').B;
+  const top = Math.round((G.top + free - target) * 1000) / 1000;
+  if (top < 0) return false;                         // would push the frame off the top of the page
+  p.frameTop = top;
+  // with automatic rows the bottom margin decides the count: keep it from adding or dropping a row
+  const bm = numOr(p.bottomMin, 20);
+  if (!(p.rows > 0) && (target < bm + 0.005 || target >= bm + G.ch - 0.005)) p.bottomMin = Math.floor(target * 100 - 0.5) / 100;
+  return true;
+}
 
 if (typeof document === 'undefined') {
   // headless use (tests): node can load the script and write the PDFs directly
-  globalThis.TD = { defaults, pdfFor, buildOps, geometry, buildCommand, fitQR, set: s => { S = s; }, get: () => S };
+  globalThis.TD = { defaults, pdfFor, buildOps, geometry, buildCommand, fitQR, matchFree, set: s => { S = s; }, get: () => S };
 } else {
 /* ---------------------------------- UI ------------------------------------ */
 const $ = id => document.getElementById(id);
@@ -720,9 +735,13 @@ function renderPreview() {
     if (q.y < edge - 0.01 && q.x < g2.R && q.x + q.s > g2.L) warn.push(`The script's QR code (${q.s / 10} cm at --qr-y-cm ${S.cli.qr_y_cm}) overlaps the ${sd} frame by ${(edge - q.y).toFixed(1)} mm.`);
   }
   if (q.y + q.s > PAGE_H + 0.01 || q.x < 0) warn.push('The QR code leaves the page.');
+  const other = side === 'front' ? 'back' : 'front', oFree = PAGE_H - geometry(other).B;
+  const matchBtn = Math.abs(oFree - (PAGE_H - G.B)) < 0.005
+    ? ` <button class="mini" disabled title="Both sides already leave the same space free below the frame.">matches ${other} ✓</button>`
+    : ` <button class="mini" data-act="matchFree" title="Moves the top of this side's frame so that the same space stays free below it as on the ${other} (${r3(oFree)} mm). The number of grid rows stays.">match ${other} (${r3(oFree)} mm)</button>`;
   $('info').innerHTML = `<b>${S[side].file}</b> · A4 210 × 297 mm · grid <b>${G.cols} × ${G.rows}</b> cells of ${r3(G.cw)} × ${r3(G.ch)} mm`
     + ` (${G.mc} margin + ${G.cols - G.mc}) · frame ${r3(G.L)}–${r3(G.R)} mm across, ${r3(G.gridTop)}–${r3(G.B)} mm down`
-    + ` · <b>${r3(PAGE_H - G.B)} mm</b> free below the frame<span id="selNote"></span>` + warn.map(w => `<span class="w">⚠ ${esc(w)}</span>`).join('');
+    + ` · <b>${r3(PAGE_H - G.B)} mm</b> free below the frame${matchBtn}<span id="selNote"></span>` + warn.map(w => `<span class="w">⚠ ${esc(w)}</span>`).join('');
 }
 function renderCommand() {
   const c = buildCommand();
@@ -800,6 +819,7 @@ document.addEventListener('click', e => {
   else if (b.dataset.zoom) { S.ui.zoom = b.dataset.zoom; refresh(false); }
   else if (b.dataset.tab) { S.ui.tab = b.dataset.tab; refresh(false); }
   else if (b.dataset.act === 'fitQR') { fitQR(); refresh(true); }
+  else if (b.dataset.act === 'matchFree') { if (!matchFree(S.ui.page)) alert('Not possible: the frame would have to start above the top of the page. Reduce the grid rows first.'); refresh(true); }
   else if (b.id === 'logoPick') $('logoFile').click();
   else if (b.id === 'logoReset') { S.logo = null; refresh(false); }
   else if (b.id === 'dlFront') download('front');
