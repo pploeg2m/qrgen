@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build one submission.png per student from data4 scans.
+"""Build one submission.png per student from a batch's scans (--batch <root>).
 
 Identity: QR 'HRW-A-V1-P<pkg>-S<sheet>-<F|B>'  -> pkg = Packagenr in CSV.
 Extra sheets: 'HRW-X-V1-X<z>-<F|B>'            -> z   = Zusatzblattnr in CSV.
@@ -17,10 +17,24 @@ import cv2, numpy as np
 from PIL import Image
 from empty_features_v2 import deskew
 
-ROOT = Path("data4")
-CSV = ROOT / "priorExam" / "anwesenheit_gefiltert_final.csv"
-OUT = ROOT / "submissions"
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from scan2e2x.batch import load_batch, pop_batch_arg
+
 W = 1000  # per-page width in stitched output
+
+
+def _init(batch=None):
+    """Bind the module globals to a batch (importers may rebind)."""
+    global CFG, ROOT, CSV, OUT, FIXUPS
+    CFG = load_batch(batch)
+    ROOT = CFG.root
+    CSV = CFG.csv_path
+    OUT = CFG.submissions_dir
+    # human-verified OCR corrections: misread pkg -> true pkg
+    FIXUPS = CFG.qr_fixups
+
+
+_init()
 
 
 def load_csv():
@@ -40,16 +54,12 @@ def load_csv():
     return pkg2row, z2pkg
 
 
-# human-verified OCR corrections: misread pkg -> true pkg
-FIXUPS = {900503: 503}   # HS1_2/062 raw 'P900503-S07-B' = booklet 503's missing S07-B
-
-
 def scan():
     """booklets: pkg -> list of (sheet, side_rank, leaf). extras: znum -> [(rank,leaf)]."""
     booklets = defaultdict(list)
     extras = defaultdict(list)
     bad = []
-    for qp in glob.glob("data4/runs/*/*/qr.json"):
+    for qp in glob.glob(str(CFG.runs_dir / "*" / "*" / "qr.json")):
         d = json.load(open(qp))
         leaf = Path(qp).parent
         raw = d.get("qr_raw") or ""
@@ -84,8 +94,71 @@ def is_empty(leaf):
     return p.exists() and json.load(open(p)).get("is_empty", False)
 
 
+def load_hs_map():
+    """Matrikelnr -> 'HS<N>' from the batch's Prüfungsliste.
+
+    PDF: positional parse — table rows carry Matrikelnr (x≈111) and the Raum
+    column with the literal word 'Hörsaal' followed by the room number.
+    CSV (for batches whose Prüfungsliste exists only as an image scan, e.g.
+    data6): columns 'Matrikelnr.;Hörsaal' with values like 'HS4'.
+    """
+    if str(CFG.pruefungsliste_path).lower().endswith(".csv"):
+        out = {}
+        with open(CFG.pruefungsliste_path, encoding="utf-8-sig") as f:
+            for row in csv.DictReader(f, delimiter=";"):
+                m = (row.get("Matrikelnr.") or row.get("Matrikelnr") or "").strip()
+                hs = (row.get("Hörsaal") or row.get("Hoersaal") or "").strip()
+                if m and hs:
+                    out[m] = hs
+        return out
+    import fitz
+    out = {}
+    doc = fitz.open(str(CFG.pruefungsliste_path))
+    for page in doc:
+        rows = {}
+        for x0, y0, x1, y1, w, *_ in page.get_text("words"):
+            rows.setdefault(round(y0 / 6), []).append((x0, w))
+        for r in rows.values():
+            r.sort()
+            matr = next((w for x, w in r
+                         if 100 < x < 150 and re.fullmatch(r"\d{7,8}", w)), None)
+            if not matr:
+                continue
+            words = [w for _, w in r]
+            if "Hörsaal" in words:
+                i = words.index("Hörsaal")
+                if i + 1 < len(words) and words[i + 1].isdigit():
+                    out[matr] = f"HS{words[i + 1]}"
+    doc.close()
+    return out
+
+
+FRAME_INSET = 12   # px cut INSIDE the frame so its printed lines are masked
+LEFT_OUTSET = 18   # px kept OUTSIDE the left edge: the left frame line stays
+                   # visible (it borders the correction margin the reviewers
+                   # read subtask labels from)
+
+
+def frame_crop(leaf, im):
+    """Cut the registered template frame (stage 01b) out of the oriented
+    page: top/right/bottom inset by FRAME_INSET (their printed lines are
+    masked), left edge outset so the left frame line stays visible. Falls
+    back to the full page when the leaf has no valid registration."""
+    p = leaf / "register.json"
+    if p.exists():
+        r = json.load(open(p))
+        b = r.get("frame_bbox_px")
+        if r.get("ok") and b:
+            m = FRAME_INSET
+            return im.crop((max(0, b["x0"] - LEFT_OUTSET), b["y0"] + m,
+                            b["x1"] - m, b["y1"] - m))
+    return im
+
+
 def deskew_color(path):
-    """Deskew the color page using the angle from its gray frame/grid lines."""
+    """LEGACY fallback: deskew via empty_features_v2 for pages the pipeline
+    never deskewed (e.g. extra sheets without an original.png). Regular
+    leaves get their fine deskew in stage 01-QR and arrive here straight."""
     bgr = cv2.imread(str(path))
     gray = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
     _, ang = deskew(gray)
@@ -96,15 +169,36 @@ def deskew_color(path):
     return Image.fromarray(cv2.cvtColor(out, cv2.COLOR_BGR2RGB))
 
 
-def stitch(pages, dest):
+def _pipeline_deskewed(leaf):
+    """True when stage 01-QR straightened this page (qr.json deskew record
+    without error) — then oriented.png must be used AS-IS: a second deskew
+    would resample again, and the legacy estimator could re-tilt onto a
+    Schlussstrich (exactly the template-arbitrated cases)."""
+    p = leaf / "qr.json"
+    if not p.exists():
+        return False
+    d = json.load(open(p)).get("deskew") or {}
+    return d.get("error") is None and d.get("angle_deg") is not None
+
+
+def stitch(pages, dest, framed=False):
     """pages: ordered list of leaf dirs -> vertical submission.png at width W.
-    Empty pages are dropped; every kept page is deskewed first."""
+    Empty pages are dropped; pages arrive deskewed from stage 01-QR (legacy
+    per-page deskew only for leaves without a pipeline deskew record).
+    With ``framed=True`` each page is cut to its registered template frame
+    (stage 01b register.json) before stitching — header/QR/margins gone,
+    only the framed solution area remains."""
     ims = []
     for leaf in pages:
         p = leaf / "oriented.png"
         if not p.exists() or is_empty(leaf):
             continue
-        im = deskew_color(p)
+        if _pipeline_deskewed(leaf):
+            im = Image.open(p).convert("RGB")
+        else:
+            im = deskew_color(p)
+        if framed:
+            im = frame_crop(leaf, im)
         h = round(im.height * W / im.width)
         ims.append(im.resize((W, h)))
     if not ims:
@@ -161,7 +255,14 @@ def audit_order(booklets, extras, z2pkg, pkg2row):
 
 
 def main():
-    build = "--build" in sys.argv
+    # --abgabe: cut each page to its registered frame and write per-student
+    # results as runs/abgabe/HS<N>/<matrikelnr>/submission.png (the
+    # data/runs/abgabe layout); implies --build.
+    batch = pop_batch_arg(sys.argv)
+    if batch:
+        _init(batch)
+    abgabe = "--abgabe" in sys.argv
+    build = "--build" in sys.argv or abgabe
     do_audit = "--audit" in sys.argv
     pkg2row, z2pkg = load_csv()
     booklets, extras, bad = scan()
@@ -218,10 +319,18 @@ def main():
         return
 
     # --- build submissions ---
-    OUT.mkdir(parents=True, exist_ok=True)
+    hs_map = load_hs_map() if abgabe else {}
+    if abgabe:
+        out_root = CFG.abgabe_out
+        print(f"\nHörsaal map from Prüfungsliste: {len(hs_map)} students, "
+              f"rooms {sorted(set(hs_map.values()))}")
+    else:
+        out_root = OUT
+    out_root.mkdir(parents=True, exist_ok=True)
     print("\nbuilding submission.png ...")
     z_as_booklet = {z for z in z2pkg if z in booklets}
     n_ok = 0
+    no_hs = []
     for pkg in sorted(scan_pkgs):
         if pkg in z_as_booklet:
             continue                                 # 2nd booklet: merged into its owner
@@ -238,15 +347,25 @@ def main():
                 for _, leaf in sorted(lst):
                     ordered.append(leaf)
         r = pkg2row.get(pkg)
-        if r:
-            slug = f"P{pkg:06d}_{r['Nachname']}_{r['Vorname']}"
+        if abgabe:
+            matr = (r.get("Matrikelnr.") or "").strip() if r else ""
+            hs = hs_map.get(matr)
+            if not hs:
+                no_hs.append((pkg, matr or "?"))
+                hs = "HS_unknown"
+            slug = f"{hs}/{matr or f'P{pkg:06d}'}"
         else:
-            slug = f"P{pkg:06d}_UNKNOWN"
-        slug = re.sub(r"[^\w.-]", "_", slug)
-        n = stitch(ordered, OUT / slug / "submission.png")
+            if r:
+                slug = f"P{pkg:06d}_{r['Nachname']}_{r['Vorname']}"
+            else:
+                slug = f"P{pkg:06d}_UNKNOWN"
+            slug = re.sub(r"[^\w.-]", "_", slug)
+        n = stitch(ordered, out_root / slug / "submission.png", framed=abgabe)
         n_ok += 1
         print(f"  {slug}: {n} pages")
-    print(f"\n{n_ok} submission.png written under {OUT}/")
+    if no_hs:
+        print(f"\n[W] no Hörsaal found in Prüfungsliste for {len(no_hs)}: {no_hs}")
+    print(f"\n{n_ok} submission.png written under {out_root}/")
 
 
 if __name__ == "__main__":

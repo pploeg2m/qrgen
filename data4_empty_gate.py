@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""data4 empty(grid-only) gate — the OCR cost gate for the QR template.
+"""Batch empty(grid-only) gate — the OCR cost gate for the QR template.
 
 Replaces the shipped ensemble (which scores 0% recall on this template) with a
 cost-weighted logistic gate on the masked OpenCV features (see
@@ -9,13 +9,21 @@ where threshold is pinned above the worst labeled ink page (never-skip-ink).
   train  : fit on empty_labels.json + empty_features_v2.json -> empty_gate_model.json
   apply  : write <leaf>/empty_gate.json {is_empty, p_empty} for every page
   page   : classify_page(gray) for live pipeline use (does masking+features)
+
+Usage:  python projects/qrgen/data4_empty_gate.py [train|apply|all] [--batch data5]
+(a batch may point its "empty_gate_model" at another batch's trained model
+to reuse it — apply then gates the new batch with the shared model)
 """
 import json, glob, sys
 from pathlib import Path
 import numpy as np
 
-ROOT = Path("data4")
-MODEL_PATH = ROOT / "empty_gate_model.json"
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from scan2e2x.batch import load_batch, pop_batch_arg  # noqa: E402
+
+CFG = load_batch(pop_batch_arg(sys.argv))
+ROOT = CFG.root
+MODEL_PATH = CFG.empty_gate_model_path
 INK_WEIGHT = 8.0
 MARGIN = 0.02
 
@@ -70,8 +78,7 @@ def apply_all():
     m = _load()
     F = json.loads((ROOT / "empty_features_v2.json").read_text())
     n_empty = 0
-    for p in glob.glob("data4/runs/WiMa_SS26_*/*/oriented.png"):
-        leaf = Path(p).parent
+    for leaf in CFG.leaf_glob("oriented.png"):
         key = f"{leaf.parent.name}/{leaf.name}"
         if key not in F:
             continue

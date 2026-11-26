@@ -10,11 +10,14 @@ Pipeline per page (oriented.png, gray):
      -> residual = student ink
   5. features from the residual.
 
-Cache: data4/empty_features_v2.json  { "<set>/<nnn>": [f1..f5] }
+Cache: <batch>/empty_features_v2.json  { "<set>/<nnn>": [f1..f5] }
 """
 import glob, json, sys
 from pathlib import Path
 import cv2, numpy as np
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from scan2e2x.batch import load_batch, pop_batch_arg  # noqa: E402
 
 FEATNAMES = ["resid_ink_pct", "n_components", "max_comp_permil", "band_cv", "dark_pct"]
 PX_PER_CM = 300 / 2.54   # oriented.png is 300 DPI
@@ -100,12 +103,12 @@ def features(gray):
             round(band_cv, 4), round(dark*100, 4)]
 
 
-def viz(keys, out):
+def viz(keys, out, runs_dir):
     tw, th = 300, 400
     cols = len(keys); sheet = np.full((th, cols*tw, 3), 255, np.uint8)
     for i, k in enumerate(keys):
         s, n = k.split("/")
-        g = cv2.imread(f"data4/runs/{s}/{n}/oriented.png", cv2.IMREAD_GRAYSCALE)
+        g = cv2.imread(str(runs_dir / s / n / "oriented.png"), cv2.IMREAD_GRAYSCALE)
         gd, ang = deskew(g)
         (x0, y0, x1, y1), found = frame_bbox(gd)
         crop, bb, a, fnd = answer_crop(g)
@@ -120,14 +123,15 @@ def viz(keys, out):
 
 
 def main():
+    cfg = load_batch(pop_batch_arg(sys.argv))
     if len(sys.argv) > 1 and sys.argv[1] == "--viz":
-        viz(sys.argv[2:], "/private/tmp/claude-501/-Users-paul-scan2e2x-projects-qrgen/bc20c979-5f9d-4ed3-afe8-7ebde5e849cf/scratchpad/mask_viz.png")
+        viz(sys.argv[2:], str(cfg.root / "_mask_viz.png"), cfg.runs_dir)
         return
-    out = Path("data4/empty_features_v2.json")
+    out = cfg.root / "empty_features_v2.json"
     cache = {}
-    leaves = sorted(glob.glob("data4/runs/WiMa_SS26_*/*/oriented.png"))
-    for i, p in enumerate(leaves):
-        leaf = Path(p).parent
+    leaves = cfg.leaf_glob("oriented.png")
+    for i, leaf in enumerate(leaves):
+        p = str(leaf / "oriented.png")
         g = cv2.imread(p, cv2.IMREAD_GRAYSCALE)
         if g is None:
             continue

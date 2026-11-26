@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Schlussstrich detection on ALL data4 non-empty pages via FSLab Qwen2.5-VL.
+"""Schlussstrich detection on ALL of a batch's non-empty pages via FSLab
+Qwen2.5-VL (--batch <root>).
 
 Uses the empty-gate (empty_gate.json) to skip grid-only pages. Resumable:
 skips leaves that already have schlussstrich.json. Writes <leaf>/schlussstrich.json.
@@ -8,7 +9,8 @@ import glob, json, re, sys, time
 from collections import Counter, defaultdict
 from pathlib import Path
 import cv2
-sys.path.insert(0, "/Users/paul/scan2e2x")
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from scan2e2x.batch import load_batch, pop_batch_arg
 from scan2e2x.ocr.openai_vision_client import OpenAIVisionClient
 
 PROMPT = """You are analyzing ONE page of a handwritten German exam written on squared (grid) paper inside a printed black rectangular frame.
@@ -39,17 +41,20 @@ def parse(txt):
     t = re.sub(r"```[a-z]*\n?", "", txt or "").strip()
     m = re.search(r"\{.*\}", t, re.DOTALL)
     for c in ([m.group(0)] if m else [t]):
-        try:
-            return json.loads(c)
-        except Exception:
-            continue
+        # second candidate: LaTeX like \( x \) in label_above is an illegal
+        # JSON escape — double any backslash not starting a valid escape
+        for fix in (c, re.sub(r'\\(?!["\\/bfnrtu])', r"\\\\", c)):
+            try:
+                return json.loads(fix)
+            except Exception:
+                continue
     return None
 
 
 def main():
     c = OpenAIVisionClient(model="Qwen2.5-VL-32B-Instruct-Q4_K_M",
                            base_url="https://llm.fslab.de/v1", api_key="fslab")
-    leaves = sorted(Path(p).parent for p in glob.glob("data4/runs/WiMa_SS26_*/*/oriented.png"))
+    leaves = load_batch(pop_batch_arg(sys.argv)).leaf_glob("oriented.png")
     todo = []
     for leaf in leaves:
         eg = leaf / "empty_gate.json"
@@ -63,9 +68,14 @@ def main():
     for i, leaf in enumerate(todo, 1):
         img = cv2.imread(str(leaf / "oriented.png"))
         try:
-            r = parse(c.ask(img, PROMPT)) or {"schlussstriche": [], "count": 0}
+            r = parse(c.ask(img, PROMPT))
         except Exception as e:
             err += 1; print(f"  ERR {leaf.parent.name}/{leaf.name}: {e}", flush=True); continue
+        if r is None:
+            # no/unparseable VLM reply (endpoint down, model unloaded, ...):
+            # the empty default would fake a "no Strich" verdict AND block
+            # the resume from retrying this leaf — count it as an error.
+            err += 1; print(f"  ERR {leaf.parent.name}/{leaf.name}: no parseable VLM reply", flush=True); continue
         (leaf / "schlussstrich.json").write_text(json.dumps(r, ensure_ascii=False))
         done += 1
         if i % 50 == 0:

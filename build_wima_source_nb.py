@@ -6,9 +6,21 @@ Mirrors the cell contract exam_layout.py parses:
   * per subtask: a `<Slug>_<L>_Description0` question cell (locked, ungraded)
     + a `<Slug>_<L>` answer cell (grade+solution, points) — crop = <grade_id>.jpg
 Points come from the Lösungsschema (bonus scaled ×0.5 → integer, task 6 = 10).
+
+NOTE: HEADER/TASKS below are EXAM CONTENT. For a new exam, edit them from
+its Aufgaben + Lösungsschema and bump TASKS_FOR to the new batch name —
+the script refuses to write another batch's notebook with stale content.
+Output lands at the batch's notebook path (batch.json "notebook").
 """
-import json
+import json, sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from scan2e2x.batch import load_batch, pop_batch_arg  # noqa: E402
+
+TASKS_FOR = "WiMa-SS26"   # batch these TASKS were authored for
+HEADER = ("### Klausur Wirtschaftsmathematik — Sommersemester 2026\n\n"
+          "Bitte tragen Sie Ihre Lösungen in die dafür vorgesehenen Antwortzellen ein.\n")
 
 # task N -> (slug, title, [(letter, points, question)])
 TASKS = {
@@ -67,9 +79,13 @@ def md(source, gid, *, grade=False, solution=False, locked=True, points=None, ta
 
 
 def build():
-    cells = [md("### Klausur Wirtschaftsmathematik — Sommersemester 2026\n\n"
-                "Bitte tragen Sie Ihre Lösungen in die dafür vorgesehenen Antwortzellen ein.\n",
-                "HeaderA", locked=True)]
+    cfg = load_batch(pop_batch_arg(sys.argv))
+    if cfg.name != TASKS_FOR:
+        raise SystemExit(
+            f"TASKS in this script are for batch {TASKS_FOR!r}, but the "
+            f"selected batch is {cfg.name!r} ({cfg.root}). Edit HEADER/TASKS "
+            "from the new exam's Aufgaben and bump TASKS_FOR first.")
+    cells = [md(HEADER, "HeaderA", locked=True)]
     for n, (slug, title, subs) in TASKS.items():
         total = sum(p for _, p, _ in subs)
         cells.append(md(f"# Task {n}  **[{total} Point(s)]**", f"taskheader_{n}"))
@@ -85,8 +101,7 @@ def build():
         "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
         "language_info": {"name": "python"}},
         "nbformat": 4, "nbformat_minor": 5}
-    out = Path("/private/tmp/claude-501/-Users-paul-scan2e2x-projects-qrgen/"
-               "bc20c979-5f9d-4ed3-afe8-7ebde5e849cf/scratchpad/HRW-WiMa-SS26-Exam.ipynb")
+    out = cfg.notebook_path
     out.write_text(json.dumps(nb, ensure_ascii=False, indent=1), encoding="utf-8")
     print("wrote", out)
 

@@ -1,31 +1,35 @@
 #!/usr/bin/env python3
-"""Assemble the complete OCR-Klausur-WiMa-SS26 nbgrader course tree locally,
-ready to upload to osiris. Patches each student's notebook (embeds crop refs)
+"""Assemble the batch's complete nbgrader course tree locally, ready to
+upload to osiris. Patches each student's notebook (embeds crop refs)
 so no terminal 'apply' step is needed.
 
-Layout built under data4/osiris_course/OCR-Klausur-WiMa-SS26/:
+Layout built under <batch>/osiris_course/<course_dir>/:
   nbgrader_config.py
   students.csv                       (matr,name,batch,filled_cells)
-  source/HRW-Ang-Stat-Exam/HRW-WiMa-SS26-Exam.ipynb
-  submitted/<matr>/HRW-Ang-Stat-Exam/
-      HRW-WiMa-SS26-Exam.ipynb       (source copy, answer cells → ![..](gid.jpg))
+  source/<assignment>/<notebook>
+  submitted/<matr>/<assignment>/
+      <notebook>                     (source copy, answer cells → ![..](gid.jpg))
       timestamp.txt
       <grade_id>.jpg                 (crops)
+
+Run from the repo root:  python projects/qrgen/build_wima_course.py [--batch data5]
 """
-import csv, json, shutil, datetime
+import csv, json, shutil, sys
 from pathlib import Path
 
-SP = Path("/private/tmp/claude-501/-Users-paul-scan2e2x-projects-qrgen/"
-          "bc20c979-5f9d-4ed3-afe8-7ebde5e849cf/scratchpad")
-SRC_NB = SP / "HRW-WiMa-SS26-Exam.ipynb"
-CROPS = Path("data4/osiris_submitted")
-ABGABE = Path("data4/abgabe")
-ROSTER = Path("data4/priorExam/anwesenheit_gefiltert_final.csv")
-OUT = Path("data4/osiris_course/OCR-Klausur-WiMa-SS26")
-ASSIGN = "HRW-Ang-Stat-Exam"
-NBNAME = "HRW-WiMa-SS26-Exam.ipynb"
-COURSE_ID = "wima_ss26"
-TS = "2026-08-03 08:00:00.000000 UTC"
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from scan2e2x.batch import load_batch, pop_batch_arg  # noqa: E402
+
+CFG = load_batch(pop_batch_arg(sys.argv))
+SRC_NB = CFG.notebook_path
+CROPS = CFG.osiris_submitted
+ABGABE = CFG.review_dir
+ROSTER = CFG.csv_path
+OUT = CFG.course_out
+ASSIGN = CFG.assignment
+NBNAME = CFG.notebook
+COURSE_ID = CFG.course_id
+TS = CFG.submission_timestamp
 
 
 def roster():
@@ -42,7 +46,7 @@ def matr_set():
     """matr -> HS set short (batch)."""
     out = {}
     for pj in ABGABE.glob("*/*/partition.json"):
-        out[pj.parent.name] = pj.parent.parent.name.replace("WiMa_SS26_", "")
+        out[pj.parent.name] = pj.parent.parent.name.replace(CFG.run_prefix, "")
     return out
 
 
@@ -64,13 +68,16 @@ def patch(nb, crop_dir):
 
 
 def main():
+    if not SRC_NB.exists():
+        raise SystemExit(f"source notebook missing: {SRC_NB} — "
+                         "generate it first (build_wima_source_nb.py)")
     m2n = roster(); m2s = matr_set()
     if OUT.exists():
         shutil.rmtree(OUT)
     (OUT / "source" / ASSIGN).mkdir(parents=True)
     shutil.copy(SRC_NB, OUT / "source" / ASSIGN / NBNAME)
     (OUT / "nbgrader_config.py").write_text(
-        "# nbgrader_config.py — WiMath SS26, isolated course root\n"
+        f"# nbgrader_config.py — {CFG.name}, isolated course root\n"
         "c = get_config()  # noqa: F821\n"
         f"c.CourseDirectory.course_id = '{COURSE_ID}'\n"
         "c.CourseDirectory.root = '.'\n")
