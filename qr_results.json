@@ -1,0 +1,1202 @@
+[
+  {
+    "page_index": 1,
+    "qr_raw": "ID001-P01",
+    "decoded_ok": true,
+    "booklet_id": "001",
+    "page_no": 1,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 2,
+    "qr_raw": "ID001-P02",
+    "decoded_ok": true,
+    "booklet_id": "001",
+    "page_no": 2,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 3,
+    "qr_raw": "ID001-P03",
+    "decoded_ok": true,
+    "booklet_id": "001",
+    "page_no": 3,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 4,
+    "qr_raw": "ID001-P04",
+    "decoded_ok": true,
+    "booklet_id": "001",
+    "page_no": 4,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 5,
+    "qr_raw": "ID001-P05",
+    "decoded_ok": true,
+    "booklet_id": "001",
+    "page_no": 5,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 6,
+    "qr_raw": "ID001-P06",
+    "decoded_ok": true,
+    "booklet_id": "001",
+    "page_no": 6,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 7,
+    "qr_raw": "ID001-P07",
+    "decoded_ok": true,
+    "booklet_id": "001",
+    "page_no": 7,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 8,
+    "qr_raw": "ID001-P08",
+    "decoded_ok": true,
+    "booklet_id": "001",
+    "page_no": 8,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 9,
+    "qr_raw": "ID002-P01",
+    "decoded_ok": true,
+    "booklet_id": "002",
+    "page_no": 1,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 10,
+    "qr_raw": "ID002-P02",
+    "decoded_ok": true,
+    "booklet_id": "002",
+    "page_no": 2,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 11,
+    "qr_raw": "ID002-P03",
+    "decoded_ok": true,
+    "booklet_id": "002",
+    "page_no": 3,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 12,
+    "qr_raw": "ID002-P04",
+    "decoded_ok": true,
+    "booklet_id": "002",
+    "page_no": 4,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 13,
+    "qr_raw": "ID002-P05",
+    "decoded_ok": true,
+    "booklet_id": "002",
+    "page_no": 5,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 14,
+    "qr_raw": "ID002-P06",
+    "decoded_ok": true,
+    "booklet_id": "002",
+    "page_no": 6,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 15,
+    "qr_raw": "ID002-P07",
+    "decoded_ok": true,
+    "booklet_id": "002",
+    "page_no": 7,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 16,
+    "qr_raw": "ID002-P08",
+    "decoded_ok": true,
+    "booklet_id": "002",
+    "page_no": 8,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 17,
+    "qr_raw": "ID003-P01",
+    "decoded_ok": true,
+    "booklet_id": "003",
+    "page_no": 1,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 18,
+    "qr_raw": "ID003-P02",
+    "decoded_ok": true,
+    "booklet_id": "003",
+    "page_no": 2,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 19,
+    "qr_raw": "ID003-P03",
+    "decoded_ok": true,
+    "booklet_id": "003",
+    "page_no": 3,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 20,
+    "qr_raw": "ID003-P04",
+    "decoded_ok": true,
+    "booklet_id": "003",
+    "page_no": 4,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 21,
+    "qr_raw": "ID003-P05",
+    "decoded_ok": true,
+    "booklet_id": "003",
+    "page_no": 5,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 22,
+    "qr_raw": "ID003-P06",
+    "decoded_ok": true,
+    "booklet_id": "003",
+    "page_no": 6,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 23,
+    "qr_raw": "ID003-P07",
+    "decoded_ok": true,
+    "booklet_id": "003",
+    "page_no": 7,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 24,
+    "qr_raw": "ID003-P08",
+    "decoded_ok": true,
+    "booklet_id": "003",
+    "page_no": 8,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 25,
+    "qr_raw": "ID004-P01",
+    "decoded_ok": true,
+    "booklet_id": "004",
+    "page_no": 1,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 26,
+    "qr_raw": "ID004-P02",
+    "decoded_ok": true,
+    "booklet_id": "004",
+    "page_no": 2,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 27,
+    "qr_raw": "ID004-P03",
+    "decoded_ok": true,
+    "booklet_id": "004",
+    "page_no": 3,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 28,
+    "qr_raw": "ID004-P04",
+    "decoded_ok": true,
+    "booklet_id": "004",
+    "page_no": 4,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 29,
+    "qr_raw": "ID004-P05",
+    "decoded_ok": true,
+    "booklet_id": "004",
+    "page_no": 5,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 30,
+    "qr_raw": "ID004-P06",
+    "decoded_ok": true,
+    "booklet_id": "004",
+    "page_no": 6,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 31,
+    "qr_raw": "ID004-P07",
+    "decoded_ok": true,
+    "booklet_id": "004",
+    "page_no": 7,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 32,
+    "qr_raw": "ID004-P08",
+    "decoded_ok": true,
+    "booklet_id": "004",
+    "page_no": 8,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 33,
+    "qr_raw": "ID005-P01",
+    "decoded_ok": true,
+    "booklet_id": "005",
+    "page_no": 1,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 34,
+    "qr_raw": "ID005-P02",
+    "decoded_ok": true,
+    "booklet_id": "005",
+    "page_no": 2,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 35,
+    "qr_raw": "ID005-P03",
+    "decoded_ok": true,
+    "booklet_id": "005",
+    "page_no": 3,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 36,
+    "qr_raw": "ID005-P04",
+    "decoded_ok": true,
+    "booklet_id": "005",
+    "page_no": 4,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 37,
+    "qr_raw": "ID005-P05",
+    "decoded_ok": true,
+    "booklet_id": "005",
+    "page_no": 5,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 38,
+    "qr_raw": "ID005-P06",
+    "decoded_ok": true,
+    "booklet_id": "005",
+    "page_no": 6,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 39,
+    "qr_raw": "ID005-P07",
+    "decoded_ok": true,
+    "booklet_id": "005",
+    "page_no": 7,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 40,
+    "qr_raw": "ID005-P08",
+    "decoded_ok": true,
+    "booklet_id": "005",
+    "page_no": 8,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 41,
+    "qr_raw": "ID006-P01",
+    "decoded_ok": true,
+    "booklet_id": "006",
+    "page_no": 1,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 42,
+    "qr_raw": "ID006-P02",
+    "decoded_ok": true,
+    "booklet_id": "006",
+    "page_no": 2,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 43,
+    "qr_raw": "ID006-P03",
+    "decoded_ok": true,
+    "booklet_id": "006",
+    "page_no": 3,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 44,
+    "qr_raw": "ID006-P04",
+    "decoded_ok": true,
+    "booklet_id": "006",
+    "page_no": 4,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 45,
+    "qr_raw": "ID006-P05",
+    "decoded_ok": true,
+    "booklet_id": "006",
+    "page_no": 5,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 46,
+    "qr_raw": "ID006-P06",
+    "decoded_ok": true,
+    "booklet_id": "006",
+    "page_no": 6,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 47,
+    "qr_raw": "ID006-P07",
+    "decoded_ok": true,
+    "booklet_id": "006",
+    "page_no": 7,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 48,
+    "qr_raw": "ID006-P08",
+    "decoded_ok": true,
+    "booklet_id": "006",
+    "page_no": 8,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 49,
+    "qr_raw": "ID007-P01",
+    "decoded_ok": true,
+    "booklet_id": "007",
+    "page_no": 1,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 50,
+    "qr_raw": "ID007-P02",
+    "decoded_ok": true,
+    "booklet_id": "007",
+    "page_no": 2,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 51,
+    "qr_raw": "ID007-P03",
+    "decoded_ok": true,
+    "booklet_id": "007",
+    "page_no": 3,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 52,
+    "qr_raw": "ID007-P04",
+    "decoded_ok": true,
+    "booklet_id": "007",
+    "page_no": 4,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 53,
+    "qr_raw": "ID007-P05",
+    "decoded_ok": true,
+    "booklet_id": "007",
+    "page_no": 5,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 54,
+    "qr_raw": "ID007-P06",
+    "decoded_ok": true,
+    "booklet_id": "007",
+    "page_no": 6,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 55,
+    "qr_raw": "ID007-P07",
+    "decoded_ok": true,
+    "booklet_id": "007",
+    "page_no": 7,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 56,
+    "qr_raw": "ID007-P08",
+    "decoded_ok": true,
+    "booklet_id": "007",
+    "page_no": 8,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 57,
+    "qr_raw": "ID008-P01",
+    "decoded_ok": true,
+    "booklet_id": "008",
+    "page_no": 1,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 58,
+    "qr_raw": "ID008-P02",
+    "decoded_ok": true,
+    "booklet_id": "008",
+    "page_no": 2,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 59,
+    "qr_raw": "ID008-P03",
+    "decoded_ok": true,
+    "booklet_id": "008",
+    "page_no": 3,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 60,
+    "qr_raw": "ID008-P04",
+    "decoded_ok": true,
+    "booklet_id": "008",
+    "page_no": 4,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 61,
+    "qr_raw": "ID008-P05",
+    "decoded_ok": true,
+    "booklet_id": "008",
+    "page_no": 5,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 62,
+    "qr_raw": "ID008-P06",
+    "decoded_ok": true,
+    "booklet_id": "008",
+    "page_no": 6,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 63,
+    "qr_raw": "ID008-P07",
+    "decoded_ok": true,
+    "booklet_id": "008",
+    "page_no": 7,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 64,
+    "qr_raw": "ID008-P08",
+    "decoded_ok": true,
+    "booklet_id": "008",
+    "page_no": 8,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 65,
+    "qr_raw": "ID009-P01",
+    "decoded_ok": true,
+    "booklet_id": "009",
+    "page_no": 1,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 66,
+    "qr_raw": "ID009-P02",
+    "decoded_ok": true,
+    "booklet_id": "009",
+    "page_no": 2,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 67,
+    "qr_raw": "ID009-P03",
+    "decoded_ok": true,
+    "booklet_id": "009",
+    "page_no": 3,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 68,
+    "qr_raw": "ID009-P04",
+    "decoded_ok": true,
+    "booklet_id": "009",
+    "page_no": 4,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 69,
+    "qr_raw": "ID009-P05",
+    "decoded_ok": true,
+    "booklet_id": "009",
+    "page_no": 5,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 70,
+    "qr_raw": "ID009-P06",
+    "decoded_ok": true,
+    "booklet_id": "009",
+    "page_no": 6,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 71,
+    "qr_raw": "ID009-P07",
+    "decoded_ok": true,
+    "booklet_id": "009",
+    "page_no": 7,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 72,
+    "qr_raw": "ID009-P08",
+    "decoded_ok": true,
+    "booklet_id": "009",
+    "page_no": 8,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 73,
+    "qr_raw": "ID010-P01",
+    "decoded_ok": true,
+    "booklet_id": "010",
+    "page_no": 1,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 74,
+    "qr_raw": "ID010-P02",
+    "decoded_ok": true,
+    "booklet_id": "010",
+    "page_no": 2,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 75,
+    "qr_raw": "ID010-P03",
+    "decoded_ok": true,
+    "booklet_id": "010",
+    "page_no": 3,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 76,
+    "qr_raw": "ID010-P04",
+    "decoded_ok": true,
+    "booklet_id": "010",
+    "page_no": 4,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 77,
+    "qr_raw": "ID010-P05",
+    "decoded_ok": true,
+    "booklet_id": "010",
+    "page_no": 5,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 78,
+    "qr_raw": "ID010-P06",
+    "decoded_ok": true,
+    "booklet_id": "010",
+    "page_no": 6,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 79,
+    "qr_raw": "ID010-P07",
+    "decoded_ok": true,
+    "booklet_id": "010",
+    "page_no": 7,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 80,
+    "qr_raw": "ID010-P08",
+    "decoded_ok": true,
+    "booklet_id": "010",
+    "page_no": 8,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 81,
+    "qr_raw": "ID011-P01",
+    "decoded_ok": true,
+    "booklet_id": "011",
+    "page_no": 1,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 82,
+    "qr_raw": "ID011-P02",
+    "decoded_ok": true,
+    "booklet_id": "011",
+    "page_no": 2,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 83,
+    "qr_raw": "ID011-P03",
+    "decoded_ok": true,
+    "booklet_id": "011",
+    "page_no": 3,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 84,
+    "qr_raw": "ID011-P04",
+    "decoded_ok": true,
+    "booklet_id": "011",
+    "page_no": 4,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 85,
+    "qr_raw": "ID011-P05",
+    "decoded_ok": true,
+    "booklet_id": "011",
+    "page_no": 5,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 86,
+    "qr_raw": "ID011-P06",
+    "decoded_ok": true,
+    "booklet_id": "011",
+    "page_no": 6,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 87,
+    "qr_raw": "ID011-P07",
+    "decoded_ok": true,
+    "booklet_id": "011",
+    "page_no": 7,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 88,
+    "qr_raw": "ID011-P08",
+    "decoded_ok": true,
+    "booklet_id": "011",
+    "page_no": 8,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 89,
+    "qr_raw": "ID012-P01",
+    "decoded_ok": true,
+    "booklet_id": "012",
+    "page_no": 1,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 90,
+    "qr_raw": "ID012-P02",
+    "decoded_ok": true,
+    "booklet_id": "012",
+    "page_no": 2,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 91,
+    "qr_raw": "ID012-P03",
+    "decoded_ok": true,
+    "booklet_id": "012",
+    "page_no": 3,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 92,
+    "qr_raw": "ID012-P04",
+    "decoded_ok": true,
+    "booklet_id": "012",
+    "page_no": 4,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 93,
+    "qr_raw": "ID012-P05",
+    "decoded_ok": true,
+    "booklet_id": "012",
+    "page_no": 5,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 94,
+    "qr_raw": "ID012-P06",
+    "decoded_ok": true,
+    "booklet_id": "012",
+    "page_no": 6,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 95,
+    "qr_raw": "ID012-P07",
+    "decoded_ok": true,
+    "booklet_id": "012",
+    "page_no": 7,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 96,
+    "qr_raw": "ID012-P08",
+    "decoded_ok": true,
+    "booklet_id": "012",
+    "page_no": 8,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 97,
+    "qr_raw": "ID013-P01",
+    "decoded_ok": true,
+    "booklet_id": "013",
+    "page_no": 1,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 98,
+    "qr_raw": "ID013-P02",
+    "decoded_ok": true,
+    "booklet_id": "013",
+    "page_no": 2,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 99,
+    "qr_raw": "ID013-P03",
+    "decoded_ok": true,
+    "booklet_id": "013",
+    "page_no": 3,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 100,
+    "qr_raw": "ID013-P04",
+    "decoded_ok": true,
+    "booklet_id": "013",
+    "page_no": 4,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 101,
+    "qr_raw": "ID013-P05",
+    "decoded_ok": true,
+    "booklet_id": "013",
+    "page_no": 5,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 102,
+    "qr_raw": "ID013-P06",
+    "decoded_ok": true,
+    "booklet_id": "013",
+    "page_no": 6,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 103,
+    "qr_raw": "ID013-P07",
+    "decoded_ok": true,
+    "booklet_id": "013",
+    "page_no": 7,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 104,
+    "qr_raw": "ID013-P08",
+    "decoded_ok": true,
+    "booklet_id": "013",
+    "page_no": 8,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 105,
+    "qr_raw": "ID014-P01",
+    "decoded_ok": true,
+    "booklet_id": "014",
+    "page_no": 1,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 106,
+    "qr_raw": "ID014-P02",
+    "decoded_ok": true,
+    "booklet_id": "014",
+    "page_no": 2,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 107,
+    "qr_raw": "ID014-P03",
+    "decoded_ok": true,
+    "booklet_id": "014",
+    "page_no": 3,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 108,
+    "qr_raw": "ID014-P04",
+    "decoded_ok": true,
+    "booklet_id": "014",
+    "page_no": 4,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 109,
+    "qr_raw": "ID014-P05",
+    "decoded_ok": true,
+    "booklet_id": "014",
+    "page_no": 5,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 110,
+    "qr_raw": "ID014-P06",
+    "decoded_ok": true,
+    "booklet_id": "014",
+    "page_no": 6,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 111,
+    "qr_raw": "ID014-P07",
+    "decoded_ok": true,
+    "booklet_id": "014",
+    "page_no": 7,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 112,
+    "qr_raw": "ID014-P08",
+    "decoded_ok": true,
+    "booklet_id": "014",
+    "page_no": 8,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 113,
+    "qr_raw": "ID015-P01",
+    "decoded_ok": true,
+    "booklet_id": "015",
+    "page_no": 1,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 114,
+    "qr_raw": "ID015-P02",
+    "decoded_ok": true,
+    "booklet_id": "015",
+    "page_no": 2,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 115,
+    "qr_raw": "ID015-P03",
+    "decoded_ok": true,
+    "booklet_id": "015",
+    "page_no": 3,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 116,
+    "qr_raw": "ID015-P04",
+    "decoded_ok": true,
+    "booklet_id": "015",
+    "page_no": 4,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 117,
+    "qr_raw": "ID015-P05",
+    "decoded_ok": true,
+    "booklet_id": "015",
+    "page_no": 5,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 118,
+    "qr_raw": "ID015-P06",
+    "decoded_ok": true,
+    "booklet_id": "015",
+    "page_no": 6,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 119,
+    "qr_raw": "ID015-P07",
+    "decoded_ok": true,
+    "booklet_id": "015",
+    "page_no": 7,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  },
+  {
+    "page_index": 120,
+    "qr_raw": "ID015-P08",
+    "decoded_ok": true,
+    "booklet_id": "015",
+    "page_no": 8,
+    "rotation_ccw_deg": 0,
+    "qr_quadrant_before": "lower-left",
+    "matr_nr": null
+  }
+]
