@@ -362,6 +362,28 @@ function buildOps(side) {
   return { ops: drawn, G };
 }
 
+/* The page as the scan pipeline needs it (scan2e2x reads this block from the
+   saved settings): per side the frame, where the answer area begins (below the
+   task bar's rule) and the centre of every tick circle. Millimetres from the
+   page's top-left corner, computed by geometry() like the drawing itself. */
+function layoutBlock() {
+  const out = { unit: 'mm', origin: 'top-left', page: [PAGE_W, PAGE_H], tasks: 0 };
+  for (const side of ['front', 'back']) {
+    const G = geometry(side), b = S[side].bar, circles = [];
+    if (G.bar) {
+      const y1 = G.top + numOr(b.rowH, 6.8) / 2 + 0.35 * b.labelSize * PT + numOr(b.textDy, 0);
+      const r = numOr(b.circleR, 1.4), n = Math.max(0, Math.round(numOr(b.tasks, 0)));
+      for (let i = 0; i < n; i++)
+        circles.push({ task: i + 1, cx: r3(G.L + numOr(b.contentX, 30) + r + i * numOr(b.pitch, 15)), cy: r3(y1 - 0.5 * b.labelSize * PT), r });
+      out.tasks = Math.max(out.tasks, n);
+    }
+    out[side] = { file: S[side].file, frame: { left: r3(G.L), right: r3(G.R), top: r3(G.top), bottom: r3(G.B) },
+      answer_top: r3(G.gridTop), circles };
+  }
+  out.pages = 2 * out.tasks;   // one sheet (two pages) per task
+  return out;
+}
+
 /* What assemble_PDF4exam.py adds later. Preview only, never exported. */
 function payload(pkg, page) {
   const c = S.cli, sheet = Math.floor((page - 1) / 2) + 1, sideCh = page % 2 ? 'F' : 'B';
@@ -827,7 +849,7 @@ document.addEventListener('click', e => {
   else if (b.id === 'copyCmd') { navigator.clipboard.writeText($('cmdText').textContent).then(() => { b.textContent = 'Copied'; setTimeout(() => { b.textContent = 'Copy'; }, 1200); }); }
   else if (b.id === 'saveCfg') {
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([JSON.stringify(S, null, 1)], { type: 'application/json' })); a.download = 'template_designer_settings.json';
+    a.href = URL.createObjectURL(new Blob([JSON.stringify({ ...S, layout: layoutBlock() }, null, 1)], { type: 'application/json' })); a.download = 'template_designer_settings.json';
     document.body.appendChild(a); a.click(); a.remove();
   } else if (b.id === 'loadCfg') $('cfgFile').click();
 });
